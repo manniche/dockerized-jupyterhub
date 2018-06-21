@@ -1,0 +1,31 @@
+FROM jupyter/scipy-notebook
+USER root
+RUN apt-get update -y \
+    && apt-get install -y \
+        sudo \
+        wajig software-properties-common apt-transport-https \
+        locales lsb-release \
+        vim git colordiff \
+        gcc cmake \
+        wget curl \
+        unzip bzip2 \
+    && apt-get autoremove -y \
+    && apt-get autoclean -y
+
+RUN locale-gen en_US.UTF-8 \
+    && mkdir -p /workdir && chmod 777 /workdir
+ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
+RUN apt-get update -y \
+    && apt-get install -y \
+        python3 python3-pip \
+        python3-all-dev python3-setuptools build-essential python3-wheel \
+        python python-pip \
+        python-dev python-setuptools python-wheel \
+    && pip3 install --upgrade pip \
+    && pip install --upgrade pip \
+    && apt-get autoremove \
+    && apt-get autoclean
+#RUN python3 -m pip install --no-cache jupyterhub==$JUPYTERHUB_VERSION
+ADD ./python/requirements.txt /tmp/requirements.txt
+RUN /opt/conda/bin/pip install -r /tmp/requirements.txt
+
