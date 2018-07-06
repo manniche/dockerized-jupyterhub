@@ -35,7 +35,8 @@ notebook_dir = os.environ.get('DOCKER_NOTEBOOK_DIR') or '/home/jovyan/work'
 c.DockerSpawner.notebook_dir = notebook_dir
 # Mount the real user's Docker volume on the host to the notebook user's
 # notebook directory in the container
-c.DockerSpawner.volumes = { 'jupyterlab-user-{username}': notebook_dir }
+c.DockerSpawner.volumes = { 'jupyterlab-user-{username}': notebook_dir,
+                            '/home/{username}': '/home/jovyan/{username}'}
 # volume_driver is no longer a keyword argument to create_container()
 # c.DockerSpawner.extra_create_kwargs.update({ 'volume_driver': 'local' })
 # Remove containers once they are stopped
