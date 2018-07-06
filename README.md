@@ -1,4 +1,4 @@
-# Jupyterhub docker environment
+# Jupyterhub docker environment with Jupyterlab notebooks
 
 ## Prerequisites
 
@@ -21,10 +21,10 @@ Further more, the `Makefile` will generate the postgresql password and certifica
 the `scripts` folder for these steps. If the postgres password is changed it is necessary to either rebuild the docker
 volume or perform a reset of the password in the postgres container
 
-## Building the docker containers
+## Building the docker images
 
 ```
-docker-compose build
+make build
 ```
 
 ## Running the jupyterhub server
