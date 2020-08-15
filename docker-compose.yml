@@ -14,7 +14,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       PGDATA: ${DB_VOLUME_CONTAINER}
     env_file:
-      - secrets/postgres.env
+      - ./secrets/postgres.env
     volumes:
       - "db:${DB_VOLUME_CONTAINER}"
 
@@ -55,7 +55,6 @@ services:
       POSTGRES_HOST: ${POSTGRES_HOST}
     env_file:
       - secrets/postgres.env
-      - secrets/hashkey.env
     command: >
       jupyterhub -f /srv/jupyterhub/jupyterhub_config.py
 
